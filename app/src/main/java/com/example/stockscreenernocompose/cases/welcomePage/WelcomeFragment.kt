@@ -9,6 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.stockscreenernocompose.R
 import com.example.stockscreenernocompose.databinding.FragmentWelcomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
@@ -28,12 +31,17 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
         binding.validateButton.setOnClickListener {
             val validationResult =
                 viewModel.validateSymbol(binding.tickerSymbolEditText.text.toString())
-
-            if (validationResult == 0) {
-                val action = WelcomeFragmentDirections.actionWelcomeFragmentToResultFragment()
-                findNavController().navigate(action)
-            } else {
-                Toast.makeText(context, getString(validationResult), Toast.LENGTH_SHORT).show()
+            CoroutineScope(Dispatchers.IO).launch {
+                if (validationResult == 0) {
+                    val action = WelcomeFragmentDirections.actionWelcomeFragmentToResultFragment(
+                        viewModel.getStockDetails(binding.tickerSymbolEditText.text.toString())
+                    )
+                    CoroutineScope(Dispatchers.Main).launch {
+                        findNavController().navigate(action)
+                    }
+                } else {
+                    Toast.makeText(context, getString(validationResult), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

@@ -15,8 +15,8 @@
     <dimen name="sign_in_method_button_vertical_margin">1dp</dimen>
     <dimen name="sign_in_method_button_vertical_padding">15dp</dimen>
     <dimen name="sign_in_method_button_horizontal_margin">10dp</dimen>
-    <dimen name="small_button_width">30dp</dimen>
-    <dimen name="small_button_height">30dp</dimen>
+    <dimen name="small_button_width">40dp</dimen>
+    <dimen name="small_button_height">40dp</dimen>
 
 
     <!-- TextInputLayout   -->

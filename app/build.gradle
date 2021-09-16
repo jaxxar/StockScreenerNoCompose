@@ -72,10 +72,6 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$gsonVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
-    //RxJava
-    implementation "io.reactivex.rxjava3:rxandroid:$rxJavaVersion"
-    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
 }

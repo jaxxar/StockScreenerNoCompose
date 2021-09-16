@@ -4,5 +4,11 @@
     <string name="validate">Validate</string>
     <string name="ticker_symbol">Ticker Symbol</string>
     <string name="app_ticker_symbol">Please enter the ticker symbol</string>
+    <string name="description">Description</string>
+
+    <!--contentDescription-->
+    <string name="backButtonContentDescription" translatable="false">Back Button</string>
+    <string name="homeButtonContentDescription" translatable="false">Home Button</string>
+    <string name="petImageContentDescription" translatable="false">Pet Image</string>
 
 </resources>

@@ -18,5 +18,12 @@
         android:id="@+id/resultFragment"
         android:name="com.example.stockscreenernocompose.cases.ResultPage.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result">
+        <argument
+            android:name="stockDetails"
+            app:argType="com.example.stockscreenernocompose.model.StockDetailsData" />
+        <action
+            android:id="@+id/action_resultFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
 </navigation>
