@@ -28,5 +28,8 @@
         <argument
             android:name="listStockDailyData"
             app:argType="com.example.stockscreenernocompose.model.StockDailyData[]" />
+        <argument
+            android:name="statementData"
+            app:argType="com.example.stockscreenernocompose.model.StockStatementsData[]" />
     </fragment>
 </navigation>

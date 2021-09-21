@@ -35,7 +35,8 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
                 if (validationResult == 0) {
                     val action = WelcomeFragmentDirections.actionWelcomeFragmentToResultFragment(
                         viewModel.getStockDetails(binding.tickerSymbolEditText.text.toString()),
-                        viewModel.getDailyData(binding.tickerSymbolEditText.text.toString())
+                        viewModel.getDailyData(binding.tickerSymbolEditText.text.toString()),
+                        viewModel.getStatementData(binding.tickerSymbolEditText.text.toString())
                     )
                     CoroutineScope(Dispatchers.Main).launch {
                         findNavController().navigate(action)

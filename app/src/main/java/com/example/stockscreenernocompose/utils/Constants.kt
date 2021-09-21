@@ -5,6 +5,7 @@ object Constants {
     const val BASE_URL = "https://api.tiingo.com/tiingo/"
     const val API_ENDPOINT_HISTORY = "prices"
     const val API_ENDPOINT_DAILY_DATA = "daily"
+    const val API_ENDPOINT_STATEMENT_DATA = "statements"
     const val API_ENDPOINT_FUNDAMENTALS = "fundamentals"
     const val API_KEY = "token"
     const val START_DATE = "startDate"
