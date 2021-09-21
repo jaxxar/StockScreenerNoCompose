@@ -25,5 +25,8 @@
         <action
             android:id="@+id/action_resultFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <argument
+            android:name="listStockDailyData"
+            app:argType="com.example.stockscreenernocompose.model.StockDailyData[]" />
     </fragment>
 </navigation>

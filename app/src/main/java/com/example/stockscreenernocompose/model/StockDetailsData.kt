@@ -9,13 +9,13 @@ data class StockDetailsData(
     @SerializedName("startDate")
     val startDate: String? = "",
     @SerializedName("name")
-    val name: String? = null,
+    val name: String? = "",
     @SerializedName("endDate")
     val endDate: String? = "",
     @SerializedName("exchangeCode")
-    val exchangeCode: String? = null,
+    val exchangeCode: String? = "",
     @SerializedName("ticker")
     val ticker: String? = "",
     @SerializedName("description")
-    val description: String? = null
+    val description: String? = ""
 ) : Parcelable

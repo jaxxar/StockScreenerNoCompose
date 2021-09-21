@@ -5,6 +5,11 @@
     <string name="ticker_symbol">Ticker Symbol</string>
     <string name="app_ticker_symbol">Please enter the ticker symbol</string>
     <string name="description">Description</string>
+    <string name="market_cap">Market cap: %1$s</string>
+    <string name="enterprise_val">Enterprise value: %1$s</string>
+    <string name="peRatio">PE ratio: %1$s</string>
+    <string name="pbRatio">PB ratio: %1$s</string>
+    <string name="trailingPEG1Y">Trailing PEG1Y: %1$s</string>
 
     <!--contentDescription-->
     <string name="backButtonContentDescription" translatable="false">Back Button</string>

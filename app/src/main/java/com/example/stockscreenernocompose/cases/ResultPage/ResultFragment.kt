@@ -34,6 +34,14 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             stockMarker.text = args.stockDetails.exchangeCode + ":"
             companyTicker.text = args.stockDetails.ticker
             descriptionText.text = args.stockDetails.description
+            marketCapText.text =
+                getString(R.string.market_cap, args.listStockDailyData.last().marketCap)
+            enterpriseValText.text =
+                getString(R.string.enterprise_val, args.listStockDailyData.last().enterpriseVal)
+            peRatioText.text = getString(R.string.peRatio, args.listStockDailyData.last().peRatio)
+            pbRatioText.text = getString(R.string.pbRatio, args.listStockDailyData.last().pbRatio)
+            trailingPEG1YText.text =
+                getString(R.string.trailingPEG1Y, args.listStockDailyData.last().trailingPEG1Y)
         }
     }
 
