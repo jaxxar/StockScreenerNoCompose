@@ -1,12 +1,21 @@
 package com.example.stockscreenernocompose.cases.ResultPage
 
 import androidx.lifecycle.ViewModel
+import com.example.stockscreenernocompose.model.StockDailyData
 import com.example.stockscreenernocompose.model.StockStatementsData
 
 class ResultViewModel: ViewModel() {
 
     fun validatePE(pe: Float): Boolean {
         return pe <= 20.0
+    }
+
+    fun validatePB(pb: Float): Boolean {
+        return pb <= 3.0
+    }
+
+    fun validatePEG(peg: Float): Boolean {
+        return peg <= 1.0
     }
 
     fun validateFreeCashFlow(data: Array<StockStatementsData>): Boolean {
@@ -257,6 +266,106 @@ class ResultViewModel: ViewModel() {
         }
 
         return validation.toString()
+    }
+
+    fun validateLiabilities(data: Array<StockStatementsData>): Boolean {
+        val yearlyData = arrayListOf<StockStatementsData>()
+        var averageFreeCashFlow = 0.0f
+        var totalLiabilities = 0.0f
+        data.forEach {
+            if (it.quarter.equals("0")) {
+                yearlyData.add(it)
+            }
+        }
+        yearlyData.forEach {
+            it.statementData?.cashFlow?.forEach {
+                if (it.dataCode.equals("freeCashFlow")) {
+                    averageFreeCashFlow += it.value?.toFloat() ?: 0.0f
+                }
+            }
+        }
+        yearlyData.first().statementData?.balanceSheet?.forEach {
+            if (it.dataCode.equals("liabilitiesNonCurrent")) {
+                totalLiabilities = it.value?.toFloat() ?: 0.0f
+            }
+        }
+
+        return (totalLiabilities / (averageFreeCashFlow / yearlyData.size)) < 5
+    }
+
+    fun returnLiabilities(data: Array<StockStatementsData>): String {
+        val yearlyData = arrayListOf<StockStatementsData>()
+        var averageFreeCashFlow = 0.0f
+        var totalLiabilities = 0.0f
+        data.forEach {
+            if (it.quarter.equals("0")) {
+                yearlyData.add(it)
+            }
+        }
+        yearlyData.forEach {
+            it.statementData?.cashFlow?.forEach {
+                if (it.dataCode.equals("freeCashFlow")) {
+                    averageFreeCashFlow += it.value?.toFloat() ?: 0.0f
+                }
+            }
+        }
+        yearlyData.first().statementData?.balanceSheet?.forEach {
+            if (it.dataCode.equals("liabilitiesNonCurrent")) {
+                totalLiabilities = it.value?.toFloat() ?: 0.0f
+            }
+        }
+
+        return (totalLiabilities / (averageFreeCashFlow / yearlyData.size)).toString()
+    }
+
+    fun validatePriceToAverageFreeCashFlow(
+        data: Array<StockStatementsData>,
+        dailyData: StockDailyData
+    ): Boolean {
+        val yearlyData = arrayListOf<StockStatementsData>()
+        var averageFreeCashFlow = 0.0f
+        val marketCap = dailyData.marketCap?.toFloat() ?: 0.0f
+        data.forEach {
+            if (it.quarter.equals("0")) {
+                yearlyData.add(it)
+            }
+        }
+        yearlyData.forEach {
+            it.statementData?.cashFlow?.forEach {
+                if (it.dataCode.equals("freeCashFlow")) {
+                    averageFreeCashFlow += it.value?.toFloat() ?: 0.0f
+                }
+            }
+        }
+        averageFreeCashFlow /= yearlyData.size
+
+
+        return (averageFreeCashFlow * 20) > marketCap
+    }
+
+    fun returnPriceToAverageFreeCashFlow(
+        data: Array<StockStatementsData>,
+        dailyData: StockDailyData
+    ): String {
+        val yearlyData = arrayListOf<StockStatementsData>()
+        var averageFreeCashFlow = 0.0f
+        val marketCap = dailyData.marketCap?.toFloat() ?: 0.0f
+        data.forEach {
+            if (it.quarter.equals("0")) {
+                yearlyData.add(it)
+            }
+        }
+        yearlyData.forEach {
+            it.statementData?.cashFlow?.forEach {
+                if (it.dataCode.equals("freeCashFlow")) {
+                    averageFreeCashFlow += it.value?.toFloat() ?: 0.0f
+                }
+            }
+        }
+        averageFreeCashFlow = averageFreeCashFlow / yearlyData.size * 20
+
+
+        return "20 year average free cash flow = $averageFreeCashFlow \n market cap = $marketCap"
     }
 
 }

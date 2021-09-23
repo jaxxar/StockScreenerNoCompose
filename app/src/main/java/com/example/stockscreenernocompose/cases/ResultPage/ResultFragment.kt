@@ -59,6 +59,42 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
+            if (viewModel.validatePB(args.listStockDailyData.last().pbRatio!!.toFloat())) {
+                pbRatioResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_check_circle,
+                        null
+                    )
+                )
+            } else {
+                pbRatioResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_remove_circle,
+                        null
+                    )
+                )
+            }
+
+            if (viewModel.validatePEG(args.listStockDailyData.last().trailingPEG1Y!!.toFloat())) {
+                trailingPEG1YResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_check_circle,
+                        null
+                    )
+                )
+            } else {
+                trailingPEG1YResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_remove_circle,
+                        null
+                    )
+                )
+            }
+
             if (viewModel.validateFreeCashFlow(args.statementData)) {
                 freeCashFlowResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -179,6 +215,66 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             roicText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
                     viewModel.returnROIC(args.statementData)
+                )
+                findNavController().navigate(action)
+            }
+
+            if (viewModel.validateLiabilities(args.statementData)) {
+                longTermLiabilitiesResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_check_circle,
+                        null
+                    )
+                )
+            } else {
+                longTermLiabilitiesResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_remove_circle,
+                        null
+                    )
+                )
+            }
+
+            longTermLiabilitiesText.setOnClickListener {
+                val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
+                    resources.getString(
+                        R.string.liabilities_repay,
+                        viewModel.returnLiabilities(args.statementData)
+                    )
+                )
+                findNavController().navigate(action)
+            }
+
+            if (viewModel.validatePriceToAverageFreeCashFlow(
+                    args.statementData,
+                    args.listStockDailyData.last()
+                )
+            ) {
+                priceToFreeCashFlowResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_check_circle,
+                        null
+                    )
+                )
+            } else {
+                priceToFreeCashFlowResultBox.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.ic_remove_circle,
+                        null
+                    )
+                )
+            }
+
+            priceToFreeCashFlowText.setOnClickListener {
+                val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
+                    viewModel.returnPriceToAverageFreeCashFlow(
+                        args.statementData,
+                        args.listStockDailyData.last()
+                    )
                 )
                 findNavController().navigate(action)
             }

@@ -15,6 +15,9 @@
     <string name="revenue_validation">Revenue Increase</string>
     <string name="net_income_validation">Net Income Increase</string>
     <string name="roic_validation">ROIC > 9</string>
+    <string name="liabilities_validation">Sustainable long term liabilities</string>
+    <string name="price_to_free_cash_flow_validation">Price to 20 year average free cash flow</string>
+    <string name="liabilities_repay">%1$s years to repay</string>
 
     <!--contentDescription-->
     <string name="backButtonContentDescription" translatable="false">Back Button</string>
