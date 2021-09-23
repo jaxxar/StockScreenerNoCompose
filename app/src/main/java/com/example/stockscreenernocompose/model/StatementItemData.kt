@@ -9,5 +9,5 @@ data class StatementItemData(
     @SerializedName("dataCode")
     val dataCode: String? = "",
     @SerializedName("value")
-    val value: String? = ""
+    val value: Double? = 0.0
 ) : Parcelable

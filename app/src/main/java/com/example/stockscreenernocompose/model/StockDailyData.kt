@@ -9,13 +9,13 @@ data class StockDailyData(
     @SerializedName("date")
     val date: String? = "",
     @SerializedName("marketCap")
-    val marketCap: String? = "",
+    val marketCap: Double? = 0.0,
     @SerializedName("enterpriseVal")
-    val enterpriseVal: String? = "",
+    val enterpriseVal: Double? = 0.0,
     @SerializedName("peRatio")
-    val peRatio: String? = "",
+    val peRatio: Double? = 0.0,
     @SerializedName("pbRatio")
-    val pbRatio: String? = "",
+    val pbRatio: Double? = 0.0,
     @SerializedName("trailingPEG1Y")
     val trailingPEG1Y: String? = ""
 ) : Parcelable

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.stockscreenernocompose.R
 import com.example.stockscreenernocompose.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class ResultFragment : Fragment(R.layout.fragment_result) {
@@ -26,6 +27,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     }
 
     private fun initUI() {
+        val formatter = DecimalFormat("#,###.00")
         binding.apply {
             backButton.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToWelcomeFragment()
@@ -36,12 +38,21 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             companyTicker.text = args.stockDetails.ticker
             descriptionText.text = args.stockDetails.description
             marketCapText.text =
-                getString(R.string.market_cap, args.listStockDailyData.last().marketCap)
+                getString(
+                    R.string.market_cap,
+                    formatter.format(args.listStockDailyData.last().marketCap)
+                )
             enterpriseValText.text =
-                getString(R.string.enterprise_val, args.listStockDailyData.last().enterpriseVal)
-            peRatioText.text = getString(R.string.peRatio, args.listStockDailyData.last().peRatio)
+                getString(
+                    R.string.enterprise_val,
+                    formatter.format(args.listStockDailyData.last().enterpriseVal)
+                )
+            peRatioText.text = getString(
+                R.string.peRatio,
+                formatter.format(args.listStockDailyData.last().peRatio)
+            )
 
-            if (viewModel.validatePE(args.listStockDailyData.last().peRatio!!.toFloat())) {
+            if (viewModel.validatePE(args.listStockDailyData.last().peRatio!!)) {
                 peResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -59,7 +70,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
-            if (viewModel.validatePB(args.listStockDailyData.last().pbRatio!!.toFloat())) {
+            if (viewModel.validatePB(args.listStockDailyData.last().pbRatio!!)) {
                 pbRatioResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -279,7 +290,10 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            pbRatioText.text = getString(R.string.pbRatio, args.listStockDailyData.last().pbRatio)
+            pbRatioText.text = getString(
+                R.string.pbRatio,
+                formatter.format(args.listStockDailyData.last().pbRatio)
+            )
             trailingPEG1YText.text =
                 getString(R.string.trailingPEG1Y, args.listStockDailyData.last().trailingPEG1Y)
         }
