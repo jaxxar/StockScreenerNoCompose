@@ -31,5 +31,17 @@
         <argument
             android:name="statementData"
             app:argType="com.example.stockscreenernocompose.model.StockStatementsData[]" />
+        <action
+            android:id="@+id/action_resultFragment_to_dialogFragment"
+            app:destination="@id/dialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/dialogFragment"
+        android:name="com.example.stockscreenernocompose.cases.bottomDialog.DialogFragment"
+        android:label="fragment_dialog"
+        tools:layout="@layout/fragment_dialog">
+        <argument
+            android:name="info"
+            app:argType="string" />
+    </dialog>
 </navigation>

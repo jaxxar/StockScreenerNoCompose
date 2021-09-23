@@ -41,6 +41,10 @@
         <item name="cornerRadius">7dp</item>
     </style>
 
+    <style name="VectorColorBackground" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">?attr/VectorColor</item>
+    </style>
+
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">?attr/TextColor</item>
         <item name="colorControlNormal">?attr/TextColor</item>

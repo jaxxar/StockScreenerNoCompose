@@ -10,10 +10,17 @@
     <string name="peRatio">PE ratio: %1$s</string>
     <string name="pbRatio">PB ratio: %1$s</string>
     <string name="trailingPEG1Y">Trailing PEG1Y: %1$s</string>
+    <string name="free_cash_flow_validation">Free Cash Flow Increase</string>
+    <string name="shares_validation">Total shares Decrease</string>
+    <string name="revenue_validation">Revenue Increase</string>
+    <string name="net_income_validation">Net Income Increase</string>
+    <string name="roic_validation">ROIC > 9</string>
 
     <!--contentDescription-->
     <string name="backButtonContentDescription" translatable="false">Back Button</string>
     <string name="homeButtonContentDescription" translatable="false">Home Button</string>
     <string name="petImageContentDescription" translatable="false">Pet Image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

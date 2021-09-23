@@ -106,15 +106,24 @@
             app:layout_constraintTop_toBottomOf="@+id/market_cap_text"
             tools:text="Enterprise value" />
 
+        <ImageView
+            android:id="@+id/pe_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/peRatio_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/peRatio_text" />
+
         <TextView
             android:id="@+id/peRatio_text"
             style="@style/MainText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pe_result_box"
             app:layout_constraintTop_toBottomOf="@+id/enterprise_val_text"
             tools:text="pe Ratio" />
 
@@ -141,6 +150,111 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pbRatio_text"
             tools:text="trailingPEG1Y" />
+
+        <ImageView
+            android:id="@+id/free_cash_flow_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/free_cash_flow_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/free_cash_flow_text" />
+
+        <TextView
+            android:id="@+id/free_cash_flow_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/free_cash_flow_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/free_cash_flow_result_box"
+            app:layout_constraintTop_toBottomOf="@+id/trailingPEG1Y_text" />
+
+        <ImageView
+            android:id="@+id/shares_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/shares_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shares_text" />
+
+        <TextView
+            android:id="@+id/shares_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/shares_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shares_result_box"
+            app:layout_constraintTop_toBottomOf="@+id/free_cash_flow_text" />
+
+        <ImageView
+            android:id="@+id/revenue_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/revenue_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/revenue_text" />
+
+        <TextView
+            android:id="@+id/revenue_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/revenue_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/revenue_result_box"
+            app:layout_constraintTop_toBottomOf="@+id/shares_text" />
+
+        <ImageView
+            android:id="@+id/net_income_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/net_income_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/net_income_text" />
+
+        <TextView
+            android:id="@+id/net_income_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/net_income_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/net_income_result_box"
+            app:layout_constraintTop_toBottomOf="@+id/revenue_text" />
+
+        <ImageView
+            android:id="@+id/roic_result_box"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/roic_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/roic_text" />
+
+        <TextView
+            android:id="@+id/roic_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/roic_validation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/roic_result_box"
+            app:layout_constraintTop_toBottomOf="@+id/net_income_text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
