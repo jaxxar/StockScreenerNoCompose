@@ -29,6 +29,8 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
     private fun initUI() {
 
         binding.validateButton.setOnClickListener {
+            binding.loadingLayout.visibility = View.VISIBLE
+            binding.validateButton.isClickable = false
             val validationResult =
                 viewModel.validateSymbol(binding.tickerSymbolEditText.text.toString())
             CoroutineScope(Dispatchers.IO).launch {
@@ -39,10 +41,17 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
                         viewModel.getStatementData(binding.tickerSymbolEditText.text.toString())
                     )
                     CoroutineScope(Dispatchers.Main).launch {
+                        binding.loadingLayout.visibility = View.GONE
+                        binding.validateButton.isClickable = true
                         findNavController().navigate(action)
                     }
                 } else {
-                    Toast.makeText(context, getString(validationResult), Toast.LENGTH_SHORT).show()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        binding.loadingLayout.visibility = View.GONE
+                        binding.validateButton.isClickable = true
+                        Toast.makeText(context, getString(validationResult), Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }

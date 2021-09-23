@@ -5,7 +5,7 @@ import com.example.stockscreenernocompose.model.StockDailyData
 import com.example.stockscreenernocompose.model.StockStatementsData
 import java.text.DecimalFormat
 
-class ResultViewModel: ViewModel() {
+class ResultViewModel : ViewModel() {
 
     val formatter = DecimalFormat("#,###.00")
 
