@@ -106,7 +106,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
-            if (viewModel.validateFreeCashFlow(args.statementData)) {
+            val freeCashFlowResult = viewModel.validateFreeCashFlow(args.statementData)
+            if (freeCashFlowResult.resultBoolean) {
                 freeCashFlowResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -125,12 +126,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             }
             freeCashFlowText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnFreeCashFlow(args.statementData)
+                    freeCashFlowResult.resultString
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validateTotalShares(args.statementData)) {
+            val totalSharesResult = viewModel.validateTotalShares(args.statementData)
+            if (totalSharesResult.resultBoolean) {
                 sharesResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -150,12 +152,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             sharesText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnTotalShares(args.statementData)
+                    totalSharesResult.resultString
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validateRevenue(args.statementData)) {
+            val revenueResult = viewModel.validateRevenue(args.statementData)
+            if (revenueResult.resultBoolean) {
                 revenueResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -175,12 +178,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             revenueText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnRevenue(args.statementData)
+                    revenueResult.resultString
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validateNetIncome(args.statementData)) {
+            val netIncomeResult = viewModel.validateNetIncome(args.statementData)
+            if (netIncomeResult.resultBoolean) {
                 netIncomeResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -200,12 +204,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             netIncomeText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnNetIncome(args.statementData)
+                    netIncomeResult.resultString
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validateROIC(args.statementData)) {
+            val rOICResult = viewModel.validateROIC(args.statementData)
+            if (rOICResult.resultBoolean) {
                 roicResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -225,12 +230,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             roicText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnROIC(args.statementData)
+                    rOICResult.resultString
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validateLiabilities(args.statementData)) {
+            val liabilitiesResult = viewModel.validateLiabilities(args.statementData)
+            if (liabilitiesResult.resultBoolean) {
                 longTermLiabilitiesResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -252,17 +258,17 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
                     resources.getString(
                         R.string.liabilities_repay,
-                        viewModel.returnLiabilities(args.statementData)
+                        liabilitiesResult.resultString
                     )
                 )
                 findNavController().navigate(action)
             }
 
-            if (viewModel.validatePriceToAverageFreeCashFlow(
-                    args.statementData,
-                    args.listStockDailyData.last()
-                )
-            ) {
+            val priceToFreeCashFlowResult = viewModel.validatePriceToAverageFreeCashFlow(
+                args.statementData,
+                args.listStockDailyData.last()
+            )
+            if (priceToFreeCashFlowResult.resultBoolean) {
                 priceToFreeCashFlowResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -282,10 +288,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             priceToFreeCashFlowText.setOnClickListener {
                 val action = ResultFragmentDirections.actionResultFragmentToDialogFragment(
-                    viewModel.returnPriceToAverageFreeCashFlow(
-                        args.statementData,
-                        args.listStockDailyData.last()
-                    )
+                    priceToFreeCashFlowResult.resultString
                 )
                 findNavController().navigate(action)
             }
