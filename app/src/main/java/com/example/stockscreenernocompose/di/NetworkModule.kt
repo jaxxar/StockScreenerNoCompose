@@ -18,18 +18,23 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNetworkService(): StocksAPI {
-
-        val logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        val httpClient = OkHttpClient.Builder()
-            .addInterceptor(logging)
-
+    fun provideNetworkService(httpClient: OkHttpClient.Builder): StocksAPI {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build()
             .create(StocksAPI::class.java)
+    }
+
+    @Provides
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient.Builder {
+        return OkHttpClient.Builder()
+            .addInterceptor(logging)
     }
 }

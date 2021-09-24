@@ -1,4 +1,4 @@
-package com.example.stockscreenernocompose.cases.ResultPage
+package com.example.stockscreenernocompose.cases.resultPage
 
 import android.os.Bundle
 import android.view.View

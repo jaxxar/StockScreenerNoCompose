@@ -1,4 +1,4 @@
-package com.example.stockscreenernocompose.cases.ResultPage
+package com.example.stockscreenernocompose.cases.resultPage
 
 import androidx.lifecycle.ViewModel
 import com.example.stockscreenernocompose.model.StockDailyData
@@ -8,7 +8,7 @@ import java.text.DecimalFormat
 
 class ResultViewModel : ViewModel() {
 
-    val formatter = DecimalFormat("#,###.00")
+    private val formatter = DecimalFormat("#,###.00")
 
     fun validatePE(pe: Double): Boolean {
         return pe <= 20.0
