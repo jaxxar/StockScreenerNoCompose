@@ -26,12 +26,14 @@ object NetworkModule {
             .create(StocksAPI::class.java)
     }
 
+    @Singleton
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
+    @Singleton
     @Provides
     fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient.Builder {
         return OkHttpClient.Builder()

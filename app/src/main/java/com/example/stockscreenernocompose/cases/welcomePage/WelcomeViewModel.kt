@@ -6,13 +6,13 @@ import com.example.stockscreenernocompose.model.StockDailyData
 import com.example.stockscreenernocompose.model.StockDetailsData
 import com.example.stockscreenernocompose.model.StockStatementsData
 import com.example.stockscreenernocompose.utils.Constants
-import com.example.stockscreenernocompose.utils.network.StocksAPI
+import com.example.stockscreenernocompose.utils.network.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
-class WelcomeViewModel @Inject constructor(private val api: StocksAPI) : ViewModel() {
+class WelcomeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun validateSymbol(symbol: String): Int {
         val trimmedSymbol = symbol.replace(" ", "")
@@ -22,7 +22,7 @@ class WelcomeViewModel @Inject constructor(private val api: StocksAPI) : ViewMod
     }
 
     suspend fun getStockDetails(symbol: String): StockDetailsData {
-        return api.getStockDetails(
+        return repository.getStockDetails(
             Constants.API_ENDPOINT_DAILY_DATA,
             symbol,
             Constants.API_KEY_VALUE
@@ -30,7 +30,7 @@ class WelcomeViewModel @Inject constructor(private val api: StocksAPI) : ViewMod
     }
 
     suspend fun getDailyData(symbol: String): Array<StockDailyData> {
-        return api.getDailyData(
+        return repository.getDailyData(
             Constants.API_ENDPOINT_FUNDAMENTALS,
             symbol,
             Constants.API_ENDPOINT_DAILY_DATA,
@@ -39,7 +39,7 @@ class WelcomeViewModel @Inject constructor(private val api: StocksAPI) : ViewMod
     }
 
     suspend fun getStatementData(symbol: String): Array<StockStatementsData> {
-        return api.getStatementsData(
+        return repository.getStatementsData(
             Constants.API_ENDPOINT_FUNDAMENTALS,
             symbol,
             Constants.API_ENDPOINT_STATEMENT_DATA,
