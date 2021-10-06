@@ -1,7 +1,6 @@
 package com.example.stockscreenernocompose.di
 
 import com.example.stockscreenernocompose.utils.Constants
-import com.example.stockscreenernocompose.utils.network.StocksAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +17,11 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideNetworkService(httpClient: OkHttpClient.Builder): StocksAPI {
+    fun provideNetworkService(httpClient: OkHttpClient.Builder): Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build()
-            .create(StocksAPI::class.java)
     }
 
     @Singleton

@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import retrofit2.Retrofit
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -15,8 +16,8 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideRepository(
-        api: StocksAPI
+        retrofit: Retrofit
     ): Repository {
-        return Repository(api)
+        return Repository(retrofit.create(StocksAPI::class.java))
     }
 }

@@ -1,8 +1,11 @@
 package com.example.stockscreenernocompose.cases.welcomePage
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,12 +21,29 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
     private lateinit var binding: FragmentWelcomeBinding
     private val viewModel: WelcomeViewModel by viewModels()
+    private var doubleBackToExitPressesOnce = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWelcomeBinding.bind(view)
 
         initUI()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (doubleBackToExitPressesOnce) {
+                requireActivity().finish()
+            }
+            doubleBackToExitPressesOnce = true
+            Toast.makeText(context, R.string.backToExit, Toast.LENGTH_SHORT).show()
+            Handler(Looper.getMainLooper()).postDelayed(
+                { doubleBackToExitPressesOnce = false },
+                2000
+            )
+        }
     }
 
     private fun initUI() {
@@ -56,5 +76,4 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
             }
         }
     }
-
 }

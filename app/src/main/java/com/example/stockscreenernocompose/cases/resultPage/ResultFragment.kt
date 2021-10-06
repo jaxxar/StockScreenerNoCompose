@@ -2,6 +2,7 @@ package com.example.stockscreenernocompose.cases.resultPage
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +19,16 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     private lateinit var binding: FragmentResultBinding
     private val viewModel: ResultViewModel by viewModels()
     private val args: ResultFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val action = ResultFragmentDirections.actionResultFragmentToWelcomeFragment()
+            findNavController().navigate(action)
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
