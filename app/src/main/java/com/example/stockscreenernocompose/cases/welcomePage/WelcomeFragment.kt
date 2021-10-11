@@ -46,29 +46,49 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
         }
     }
 
+    private fun beginLoading() {
+        binding.loadingLayout.visibility = View.VISIBLE
+        binding.validateButton.isClickable = false
+    }
+
+    private fun stopLoading() {
+        binding.loadingLayout.visibility = View.GONE
+        binding.validateButton.isClickable = true
+    }
+
     private fun initUI() {
 
         binding.validateButton.setOnClickListener {
-            binding.loadingLayout.visibility = View.VISIBLE
-            binding.validateButton.isClickable = false
+            beginLoading()
             val validationResult =
                 viewModel.validateSymbol(binding.tickerSymbolEditText.text.toString())
             CoroutineScope(Dispatchers.IO).launch {
                 if (validationResult == 0) {
-                    val action = WelcomeFragmentDirections.actionWelcomeFragmentToResultFragment(
-                        viewModel.getStockDetails(binding.tickerSymbolEditText.text.toString()),
-                        viewModel.getDailyData(binding.tickerSymbolEditText.text.toString()),
-                        viewModel.getStatementData(binding.tickerSymbolEditText.text.toString())
-                    )
-                    CoroutineScope(Dispatchers.Main).launch {
-                        binding.loadingLayout.visibility = View.GONE
-                        binding.validateButton.isClickable = true
-                        findNavController().navigate(action)
+                    val result =
+                        viewModel.getStockData(binding.tickerSymbolEditText.text.toString())
+                    if (result.requestResult) {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            val action =
+                                WelcomeFragmentDirections.actionWelcomeFragmentToResultFragment(
+                                    result
+                                )
+                            stopLoading()
+                            findNavController().navigate(action)
+                        }
+                    } else {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            stopLoading()
+                            Toast.makeText(
+                                context,
+                                result.requestCode.toString(),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
                     }
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
-                        binding.loadingLayout.visibility = View.GONE
-                        binding.validateButton.isClickable = true
+                        stopLoading()
                         Toast.makeText(context, getString(validationResult), Toast.LENGTH_SHORT)
                             .show()
                     }

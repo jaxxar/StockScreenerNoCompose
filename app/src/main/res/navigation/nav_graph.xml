@@ -19,21 +19,15 @@
         android:name="com.example.stockscreenernocompose.cases.resultPage.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result">
-        <argument
-            android:name="stockDetails"
-            app:argType="com.example.stockscreenernocompose.model.StockDetailsData" />
         <action
             android:id="@+id/action_resultFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
-        <argument
-            android:name="listStockDailyData"
-            app:argType="com.example.stockscreenernocompose.model.StockDailyData[]" />
-        <argument
-            android:name="statementData"
-            app:argType="com.example.stockscreenernocompose.model.StockStatementsData[]" />
         <action
             android:id="@+id/action_resultFragment_to_dialogFragment"
             app:destination="@id/dialogFragment" />
+        <argument
+            android:name="result"
+            app:argType="com.example.stockscreenernocompose.domain.DomainModel" />
     </fragment>
     <dialog
         android:id="@+id/dialogFragment"

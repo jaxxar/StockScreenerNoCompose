@@ -1,6 +1,7 @@
 package com.example.stockscreenernocompose.di
 
 import com.example.stockscreenernocompose.utils.Constants
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,7 @@ object NetworkModule {
     fun provideNetworkService(httpClient: OkHttpClient.Builder): Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
             .client(httpClient.build())
             .build()
     }

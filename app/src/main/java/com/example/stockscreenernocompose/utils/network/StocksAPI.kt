@@ -4,6 +4,7 @@ import com.example.stockscreenernocompose.model.StockDailyData
 import com.example.stockscreenernocompose.model.StockDetailsData
 import com.example.stockscreenernocompose.model.StockStatementsData
 import com.example.stockscreenernocompose.utils.Constants
+import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,7 +16,7 @@ interface StocksAPI {
         @Path("daily") daily: String,
         @Path("ticker") ticker: String,
         @Query(Constants.API_KEY) apiKey: String
-    ): StockDetailsData
+    ): ApiResponse<StockDetailsData>
 
     @GET("{fundamentals}/{ticker}/{daily}")
     suspend fun getDailyData(
@@ -23,7 +24,7 @@ interface StocksAPI {
         @Path("ticker") ticker: String,
         @Path("daily") daily: String,
         @Query(Constants.API_KEY) apiKey: String
-    ): Array<StockDailyData>
+    ): ApiResponse<ArrayList<StockDailyData>>
 
     @GET("{fundamentals}/{ticker}/{statements}")
     suspend fun getStatementsData(
@@ -31,5 +32,5 @@ interface StocksAPI {
         @Path("ticker") ticker: String,
         @Path("statements") statements: String,
         @Query(Constants.API_KEY) apiKey: String
-    ): Array<StockStatementsData>
+    ): ApiResponse<ArrayList<StockStatementsData>>
 }

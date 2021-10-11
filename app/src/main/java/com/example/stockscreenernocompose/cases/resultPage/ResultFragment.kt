@@ -44,26 +44,26 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 val action = ResultFragmentDirections.actionResultFragmentToWelcomeFragment()
                 findNavController().navigate(action)
             }
-            companyName.text = args.stockDetails.name
-            stockMarker.text = args.stockDetails.exchangeCode + ":"
-            companyTicker.text = args.stockDetails.ticker
-            descriptionText.text = args.stockDetails.description
+            companyName.text = args.result.domainStockDetailsData.name
+            stockMarker.text = args.result.domainStockDetailsData.exchangeCode + ":"
+            companyTicker.text = args.result.domainStockDetailsData.ticker
+            descriptionText.text = args.result.domainStockDetailsData.description
             marketCapText.text =
                 getString(
                     R.string.market_cap,
-                    formatter.format(args.listStockDailyData.last().marketCap)
+                    formatter.format(args.result.domainStockDailyData.last().marketCap)
                 )
             enterpriseValText.text =
                 getString(
                     R.string.enterprise_val,
-                    formatter.format(args.listStockDailyData.last().enterpriseVal)
+                    formatter.format(args.result.domainStockDailyData.last().enterpriseVal)
                 )
             peRatioText.text = getString(
                 R.string.peRatio,
-                formatter.format(args.listStockDailyData.last().peRatio)
+                formatter.format(args.result.domainStockDailyData.last().peRatio)
             )
 
-            if (viewModel.validatePE(args.listStockDailyData.last().peRatio!!)) {
+            if (viewModel.validatePE(args.result.domainStockDailyData.last().peRatio!!)) {
                 peResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -81,7 +81,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
-            if (viewModel.validatePB(args.listStockDailyData.last().pbRatio!!)) {
+            if (viewModel.validatePB(args.result.domainStockDailyData.last().pbRatio!!)) {
                 pbRatioResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -99,7 +99,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
-            if (viewModel.validatePEG(args.listStockDailyData.last().trailingPEG1Y!!.toFloat())) {
+            if (viewModel.validatePEG(args.result.domainStockDailyData.last().trailingPEG1Y!!.toFloat())) {
                 trailingPEG1YResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
@@ -117,7 +117,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 )
             }
 
-            val freeCashFlowResult = viewModel.validateFreeCashFlow(args.statementData)
+            val freeCashFlowResult =
+                viewModel.validateFreeCashFlow(args.result.domainStockStatementsData)
             if (freeCashFlowResult.resultBoolean) {
                 freeCashFlowResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -142,7 +143,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            val totalSharesResult = viewModel.validateTotalShares(args.statementData)
+            val totalSharesResult =
+                viewModel.validateTotalShares(args.result.domainStockStatementsData)
             if (totalSharesResult.resultBoolean) {
                 sharesResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -168,7 +170,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            val revenueResult = viewModel.validateRevenue(args.statementData)
+            val revenueResult = viewModel.validateRevenue(args.result.domainStockStatementsData)
             if (revenueResult.resultBoolean) {
                 revenueResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -194,7 +196,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            val netIncomeResult = viewModel.validateNetIncome(args.statementData)
+            val netIncomeResult = viewModel.validateNetIncome(args.result.domainStockStatementsData)
             if (netIncomeResult.resultBoolean) {
                 netIncomeResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -220,7 +222,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            val rOICResult = viewModel.validateROIC(args.statementData)
+            val rOICResult = viewModel.validateROIC(args.result.domainStockStatementsData)
             if (rOICResult.resultBoolean) {
                 roicResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -246,7 +248,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 findNavController().navigate(action)
             }
 
-            val liabilitiesResult = viewModel.validateLiabilities(args.statementData)
+            val liabilitiesResult =
+                viewModel.validateLiabilities(args.result.domainStockStatementsData)
             if (liabilitiesResult.resultBoolean) {
                 longTermLiabilitiesResultBox.setImageDrawable(
                     ResourcesCompat.getDrawable(
@@ -276,8 +279,8 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             }
 
             val priceToFreeCashFlowResult = viewModel.validatePriceToAverageFreeCashFlow(
-                args.statementData,
-                args.listStockDailyData.last()
+                args.result.domainStockStatementsData,
+                args.result.domainStockDailyData.last()
             )
             if (priceToFreeCashFlowResult.resultBoolean) {
                 priceToFreeCashFlowResultBox.setImageDrawable(
@@ -306,10 +309,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
             pbRatioText.text = getString(
                 R.string.pbRatio,
-                formatter.format(args.listStockDailyData.last().pbRatio)
+                formatter.format(args.result.domainStockDailyData.last().pbRatio)
             )
             trailingPEG1YText.text =
-                getString(R.string.trailingPEG1Y, args.listStockDailyData.last().trailingPEG1Y)
+                getString(
+                    R.string.trailingPEG1Y,
+                    args.result.domainStockDailyData.last().trailingPEG1Y
+                )
         }
     }
 

@@ -1,8 +1,8 @@
 package com.example.stockscreenernocompose.cases.resultPage
 
 import androidx.lifecycle.ViewModel
-import com.example.stockscreenernocompose.model.StockDailyData
-import com.example.stockscreenernocompose.model.StockStatementsData
+import com.example.stockscreenernocompose.domain.DomainStockDailyData
+import com.example.stockscreenernocompose.domain.DomainStockStatementsData
 import com.example.stockscreenernocompose.model.ValidationResult
 import java.text.DecimalFormat
 
@@ -22,9 +22,9 @@ class ResultViewModel : ViewModel() {
         return peg <= 1.0
     }
 
-    fun validateFreeCashFlow(data: Array<StockStatementsData>): ValidationResult {
+    fun validateFreeCashFlow(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var latestFreeCashFlow = 0.0
         var oldestFreeCashFlow = 0.0
         data.forEach {
@@ -48,9 +48,9 @@ class ResultViewModel : ViewModel() {
         return validationResult
     }
 
-    fun validateTotalShares(data: Array<StockStatementsData>): ValidationResult {
+    fun validateTotalShares(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var latestTotalShares = 0.0
         var oldestTotalShares = 0.0
         data.forEach {
@@ -74,9 +74,9 @@ class ResultViewModel : ViewModel() {
         return validationResult
     }
 
-    fun validateRevenue(data: Array<StockStatementsData>): ValidationResult {
+    fun validateRevenue(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var latestRevenue = 0.0
         var oldestRevenue = 0.0
         data.forEach {
@@ -100,9 +100,9 @@ class ResultViewModel : ViewModel() {
         return validationResult
     }
 
-    fun validateNetIncome(data: Array<StockStatementsData>): ValidationResult {
+    fun validateNetIncome(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var latestNetIncome = 0.0
         var oldestNetIncome = 0.0
         data.forEach {
@@ -126,9 +126,9 @@ class ResultViewModel : ViewModel() {
         return validationResult
     }
 
-    fun validateROIC(data: Array<StockStatementsData>): ValidationResult {
+    fun validateROIC(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var netIncome = 0.0
         var dividend = 0.0
         var dept = 0.0
@@ -165,9 +165,9 @@ class ResultViewModel : ViewModel() {
         return validationResult
     }
 
-    fun validateLiabilities(data: Array<StockStatementsData>): ValidationResult {
+    fun validateLiabilities(data: ArrayList<DomainStockStatementsData>): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var averageFreeCashFlow = 0.0
         var totalLiabilities = 0.0
         data.forEach {
@@ -195,11 +195,11 @@ class ResultViewModel : ViewModel() {
     }
 
     fun validatePriceToAverageFreeCashFlow(
-        data: Array<StockStatementsData>,
-        dailyData: StockDailyData
+        data: ArrayList<DomainStockStatementsData>,
+        dailyData: DomainStockDailyData
     ): ValidationResult {
         val validationResult = ValidationResult(false, "")
-        val yearlyData = arrayListOf<StockStatementsData>()
+        val yearlyData = arrayListOf<DomainStockStatementsData>()
         var averageFreeCashFlow = 0.0
         val marketCap = dailyData.marketCap ?: 0.0
         data.forEach {
