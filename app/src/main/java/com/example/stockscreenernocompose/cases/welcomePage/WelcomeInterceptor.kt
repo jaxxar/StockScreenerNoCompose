@@ -42,7 +42,7 @@ class WelcomeInterceptor(private val repository: Repository, private val symbol:
     }
 
     private suspend fun getDetailsData(): DomainStockDetailsData {
-        var apiDetailsData: StockDetailsData?
+        var apiDetailsData: StockDetailsData
         var domainDetailsData = DomainStockDetailsData()
         repository.getStockDetails(
             Constants.API_ENDPOINT_DAILY_DATA,
@@ -50,7 +50,7 @@ class WelcomeInterceptor(private val repository: Repository, private val symbol:
             Constants.API_KEY_VALUE
         ).suspendOnSuccess {
             apiDetailsData = this.data
-            domainDetailsData = DetailsDataApiToDomainTransformer().transform(apiDetailsData!!)
+            domainDetailsData = DetailsDataApiToDomainTransformer().transform(apiDetailsData)
         }.onError {
             map(ErrorResponseMapper) {
                 domainDetailsData.requestResult = false
@@ -75,17 +75,15 @@ class WelcomeInterceptor(private val repository: Repository, private val symbol:
             domainDailyData = DailyDataApiToDomainTransformer().transform(apiDailyData)
         }.onError {
             map(ErrorResponseMapper) {
-                domainDailyData.forEach {
-                    DomainStockDailyData()
-                    it.requestResult = false
-                    it.requestCode = this.code
-                }
+                domainDailyData.add(
+                    DomainStockDailyData(
+                        requestResult = false,
+                        requestCode = this.code
+                    )
+                )
             }
         }.onException {
-            domainDailyData.forEach {
-                DomainStockDailyData()
-                it.requestResult = false
-            }
+            domainDailyData.add(DomainStockDailyData(requestResult = false))
         }
         return domainDailyData
     }
@@ -105,17 +103,15 @@ class WelcomeInterceptor(private val repository: Repository, private val symbol:
 
         }.onError {
             map(ErrorResponseMapper) {
-                domainStatementsData.forEach {
-                    DomainStockStatementsData()
-                    it.requestResult = false
-                    it.requestCode = this.code
-                }
+                domainStatementsData.add(
+                    DomainStockStatementsData(
+                        requestResult = false,
+                        requestCode = this.code
+                    )
+                )
             }
         }.onException {
-            domainStatementsData.forEach {
-                DomainStockStatementsData()
-                it.requestResult = false
-            }
+            domainStatementsData.add(DomainStockStatementsData(requestResult = false))
         }
         return domainStatementsData
     }
